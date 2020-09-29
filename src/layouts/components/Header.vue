@@ -2,10 +2,10 @@
   <div class="page">
     <h1 class="header_h">bootstet 博客</h1>
     <h3 class="header_t">欢迎来到bootstet博客</h3>
-    <nav class="nav">
-      <g-link class="nav__link" to="https://github.com/bootstet">Github 主页</g-link>
-      <g-link class="nav__link" to="/about/">博客源码</g-link>
-    </nav>
+    <!-- <nav class="nav"> -->
+      <!-- <g-link class="nav__link" to="https://github.com/bootstet">Github 主页</g-link>
+      <g-link class="nav__link" to="/about/">博客源码</g-link> -->
+    <!-- </nav> -->
   </div>
 </template>
 
@@ -33,6 +33,7 @@ export default {
     background-image: linear-gradient(120deg, rgb(38, 144, 249), rgb(252, 45, 45));
     color: rgb(255, 255, 255);
     overflow: hidden;
+    border: 1px solid red;
   }
   .header_h {
     text-align: center;

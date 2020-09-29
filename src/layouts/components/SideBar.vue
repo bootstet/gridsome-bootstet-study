@@ -1,48 +1,25 @@
 <template>
-  <div>
-    <el-card shadow="never">
-      <el-menu :default-active="active" @select="onSelect">
-        <el-menu-item
-          v-for="item in constantRouterMap"
-          v-if="item.meta&&item.meta.type=='user'&&(token||!item.meta.LoginRequired)&&(!mini||!item.meta.mini)"
-          :key="item.path"
-          :index="item.path"
-        >
-          <i :class="item.meta.icon"></i>
-          <span slot="title">{{item.meta.title}}</span>
-        </el-menu-item>
-      </el-menu>
-    </el-card>
-
-    <el-card shadow="never" style="margin-top: 20px;text-align: center">
-      <div v-if="!token" style="font-size: 0.9rem;line-height: 1.5;color: #606c71;">
-        <el-tag type="danger" size="small">&nbsp;</el-tag>&nbsp;&nbsp; Token未绑定&nbsp;&nbsp;
-        <el-button type="text" @click="openTokenDialog">绑定</el-button>
+  <div class="never">
+    <div class="main-slide" >
+      <div
+        v-for="item in constantRouterMap"
+        :key="item.path"
+        :index="item.path"
+      >
+        <g-link class="link" :to="item.path">{{item.meta.title}}</g-link>
       </div>
-      <div v-if="token" style="font-size: 0.9rem;line-height: 1.5;color: #303133;">
-        <el-tag type="success" size="small">&nbsp;</el-tag>&nbsp;&nbsp; Token已绑定&nbsp;&nbsp;
-        <el-button type="text" @click="cancellation">注销</el-button>
-      </div>
-      <div style="margin-top: 10px;text-align: left">
-        <el-alert
-          title="Token获取"
-          type="info"
-          description="在 github-> settings-> developerSettings-> personalAccessTokens 勾选gist权限,获取Token. 详情参考README.md"
-          :closable="false"
-        ></el-alert>
-      </div>
-    </el-card>
-    <token-dialog ref="tokenDialog"></token-dialog>
+    </div>
+    
+    <div class="main-content">
+      <slot/>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { constantRouterMap } from "@/router";
-import TokenDialog from "@/views/common/TokenDialog";
+import { constantRouterMap } from "../../route";
 export default {
   components: {
-    TokenDialog,
   },
   data() {
     return {
@@ -53,11 +30,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["token", "githubUsername", "mini"]),
   },
   mounted() {
     let arr = this.$route.path.split("/");
     this.active = "/" + arr[1] + "/" + arr[2];
+    console.log(constantRouterMap)
   },
   methods: {
     onSelect(index) {
@@ -72,3 +49,24 @@ export default {
   },
 };
 </script>
+<style>
+  .never {
+    /* width: 200px; */
+    width: 100%;
+    height: 500px;
+    display: flex;
+  }
+  .never .main-slide {
+    flex: 2;
+  }
+  .never .main-content {
+    flex: 5;
+    border: 1px solid #666;
+  }
+  .never .link {
+    width: 200px;
+    height: 80px;
+    border: 1px solid #000;
+    color: red;
+  }
+</style>

@@ -2,21 +2,16 @@
   <div class="layout">
     <header class="header">
       <Header >
-        <slot/>
       </Header>
-      <!-- <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong> -->
-      <!-- <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav> -->
     </header>
+    <SideBar>
     <slot/>
+    </SideBar>
   </div>
 </template>
 <script type="text/ecmascript-6">
 import Header from './components/Header'
+import SideBar from './components/SideBar'
 export default {
    data() {
      return {
@@ -24,7 +19,8 @@ export default {
      }
    },
    components: {
-     Header
+     Header,
+     SideBar
    }
 }
 </script>
